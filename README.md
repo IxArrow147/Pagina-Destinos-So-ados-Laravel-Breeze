@@ -4,7 +4,7 @@ Sistema de gestión turística desarrollado como proyecto de aprendizaje y evalu
 
 ## 🛠️ Tecnologías y Herramientas Utilizadas
 
-*   **Backend:** Laravel 11 (PHP 8.2+)
+*   **Backend:** Laravel 13.38.0 (PHP 8.4.27)
 *   **Autenticación:** Laravel Breeze
 *   **Base de Datos:** MySQL (Gestionado en MySQL Workbench)
 *   **Frontend (Panel):** Tailwind CSS (por defecto en Breeze) y Bootstrap 5 (para el CRUD).
