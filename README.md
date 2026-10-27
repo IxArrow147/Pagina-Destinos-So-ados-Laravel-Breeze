@@ -30,7 +30,7 @@ Asegúrate de tener instalado:
 ### 2. Clonar el Repositorio e Instalar Dependencias
 Abre tu terminal y ejecuta:
 ```bash
-git clone <URL_DE_TU_REPOSITORIO>
+git clone <(https://github.com/IxArrow147/Pagina-Destinos-So-ados-Laravel-Breeze)>
 cd example-app
 composer install
 npm install
