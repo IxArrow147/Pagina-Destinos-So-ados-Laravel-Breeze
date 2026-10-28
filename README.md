@@ -4,7 +4,7 @@ Sistema de gestión turística desarrollado como proyecto de aprendizaje y evalu
 
 ## 🛠️ Tecnologías y Herramientas Utilizadas
 
-*   **Backend:** Laravel 11 (PHP 8.2+)
+*   **Backend:** Laravel 13.38.0 (PHP 8.4.27)
 *   **Autenticación:** Laravel Breeze
 *   **Base de Datos:** MySQL (Gestionado en MySQL Workbench)
 *   **Frontend (Panel):** Tailwind CSS (por defecto en Breeze) y Bootstrap 5 (para el CRUD).
@@ -27,22 +27,14 @@ Asegúrate de tener instalado:
 *   [MySQL](https://dev.mysql.com/downloads/workbench/) (o un gestor compatible como MariaDB).
 *   Opcional: [Laravel Herd](https://herd.laravel.com/) (para un entorno de desarrollo rápido).
 
-### 2. Clonar el Repositorio e Instalar Dependencias
-Abre tu terminal y ejecuta:
-```bash
-git clone <URL_DE_TU_REPOSITORIO>
-cd example-app
-composer install
-npm install
-
 GUÍA DE INSTALACIÓN (PASO A PASO)
 
 Requisitos previos
-Tener instalado PHP 8.2+, Composer, Node.js/NPM y MySQL.
+Tener instalado Laravel 13.38.0 (PHP 8.4.27), Composer, Node.js/NPM y MySQL.
 
 Clonar el repositorio e instalar dependencias
 Abre la terminal y ejecuta:
-git clone <URL_DE_TU_REPOSITORIO>
+git clone https://github.com/IxArrow147/Pagina-Destinos-So-ados-Laravel-Breeze
 cd example-app
 composer install
 npm install
@@ -53,6 +45,7 @@ Copia la plantilla con este comando:
 cp .env.example .env
 Luego genera la clave de la aplicación:
 php artisan key:generate
+
 Abre el archivo .env y configura TUS credenciales de MySQL:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -63,7 +56,7 @@ DB_PASSWORD=tu_contraseña_local
 
 Base de Datos (¡IMPORTANTE! Orden Correcto)
 El proyecto usa una base de datos preexistente con Stored Procedures. NO uses 'php artisan migrate' todavía.
-Ve a la carpeta 'database_scripts/' en la raíz del proyecto. Abre MySQL Workbench y ejecuta los archivos en este estricto orden:
+Ve a la carpeta 'database/scripts' en la raíz del proyecto. Abre MySQL Workbench o tu bases de datos de confianza y ejecuta los archivos en este estricto orden:
 
 01_creacion_tablas.sql (Crea la BD y las tablas relacionales)
 
@@ -81,7 +74,7 @@ Ejecuta:
 npm run build
 php artisan serve
 (Si usas Laravel Herd, abre el proyecto desde su panel).
-Visita http://localhost:8000 en tu navegador.
+o usa  si haces otro metodo Visita http://localhost:8000 en tu navegador.
 
 CREDENCIALES DE PRUEBA (Usuario Breeze)
 Puedes registrarte en la ruta /register o usar este usuario para probar el panel rápido:
