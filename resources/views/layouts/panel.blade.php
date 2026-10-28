@@ -54,6 +54,11 @@
                             <i class="fa-solid fa-map-location-dot header__nav-icon"></i> Destinos
                         </a>
                     </li>
+                    <li class="header__nav-item">
+                        <a href="{{ route('reservas.index') }}" class="header__nav-link {{ request()->routeIs('reservas.*') ? 'header__nav-link--active' : '' }}">
+                            <i class="fa-solid fa-suitcase-rolling header__nav-icon"></i> Reservas
+                        </a>
+                    </li>
                     <!-- Aquí irás agregando Clientes, Reservas, etc. luego -->
                 </ul>
             </nav>
@@ -66,7 +71,7 @@
             <!-- Menú de Usuario (Logout) -->
             <div class="dropdown">
                 <button class="header__cta header__cta--logout dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    <i class="fa-solid fa-user me-1"></i> {{ Auth::user()->name }}
+                    <i class="fa-solid fa-user me-1"></i> {{ Auth::user()->name ?? 'Invitado' }}
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Mi Perfil</a></li>

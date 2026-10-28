@@ -44,9 +44,9 @@
                         </a>
                     </li>
                     <li class="header__nav-item">
-                        <a href="#" class="header__nav-link">
+                        <a href="{{ route('reservas.index') }}" class="header__nav-link">
                             <i class="fa-solid fa-suitcase-rolling header__nav-icon"></i>
-                            Paquetes
+                            Reservas
                         </a>
                     </li>
                     <li class="header__nav-item">
