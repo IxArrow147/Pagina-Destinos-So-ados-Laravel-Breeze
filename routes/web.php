@@ -18,7 +18,7 @@ Route::get('/dashboard', function () {
 
 //2.5 Rutas Publicas
 Route::middleware('auth')->group(function () {
-    
+   
 });
 
 // 3. Rutas protegidas para ADMINISTRADORES

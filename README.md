@@ -1,13 +1,13 @@
 # 🏝️ TourSystem | Destinos Soñados S.A.
 
-Sistema de gestión turística desarrollado como proyecto de aprendizaje y evaluación. Incluye una Landing Page pública, un sistema de autenticación de usuarios y un panel de administración (CRUD) para gestionar destinos, conectado a una base de datos relacional robusta mediante **Stored Procedures**.
+Sistema de gestión turística desarrollado como proyecto de aprendizaje y evaluación. Incluye una Landing Page pública, un sistema de autenticación de usuarios y un panel de administración (CRUD) para gestionar destinos y reservas, conectado a una base de datos relacional robusta mediante **Stored Procedures**.
 
 ## 🛠️ Tecnologías y Herramientas Utilizadas
 
 *   **Backend:** Laravel 13.38.0 (PHP 8.4.27)
 *   **Autenticación:** Laravel Breeze
 *   **Base de Datos:** MySQL (Gestionado en MySQL Workbench)
-*   **Frontend (Panel):** Tailwind CSS (por defecto en Breeze) y Bootstrap 5 (para el CRUD).
+*   **Frontend (Panel):** Bootstrap 5 y FontAwesome.
 *   **Frontend (Landing):** Bootstrap 5, CSS puro (Metodología BEM) y FontAwesome.
 *   **Entorno de Desarrollo:** Laravel Herd
 *   **Editor de Código:** Visual Studio Code
@@ -27,64 +27,74 @@ Asegúrate de tener instalado:
 *   [MySQL](https://dev.mysql.com/downloads/workbench/) (o un gestor compatible como MariaDB).
 *   Opcional: [Laravel Herd](https://herd.laravel.com/) (para un entorno de desarrollo rápido).
 
-GUÍA DE INSTALACIÓN (PASO A PASO)
-
-Requisitos previos
-Tener instalado Laravel 13.38.0 (PHP 8.4.27), Composer, Node.js/NPM y MySQL.
-
-Clonar el repositorio e instalar dependencias
-Abre la terminal y ejecuta:
+### 2. Clonar el Repositorio e Instalar Dependencias
+Abre tu terminal y ejecuta:
+```bash
 git clone https://github.com/IxArrow147/Pagina-Destinos-So-ados-Laravel-Breeze
 cd example-app
 composer install
 npm install
 
-Configurar el entorno (.env)
-Laravel usa dos archivos: .env (privado) y .env.example (plantilla pública).
-Copia la plantilla con este comando:
+### 3. Configurar el Entorno (.env)
+Laravel utiliza dos archivos para la configuración: .env (privado) y .env.example (plantilla pública).
+
+### 4. Duplica el archivo de ejemplo ejecutando en la terminal:
 cp .env.example .env
-Luego genera la clave de la aplicación:
+
+### 5. Genera la clave de la aplicación:
 php artisan key:generate
 
-Abre el archivo .env y configura TUS credenciales de MySQL:
+### 6. Abre el archivo .env recién creado y configura las credenciales de tu base de datos local:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=Destinos_Soñados_SA
 DB_USERNAME=tu_usuario_local
 DB_PASSWORD=tu_contraseña_local
+(Nota: Debes crear la base de datos vacía llamada Destinos_Soñados_SA en tu MySQL Workbench antes de continuar).
 
-Base de Datos (¡IMPORTANTE! Orden Correcto)
-El proyecto usa una base de datos preexistente con Stored Procedures. NO uses 'php artisan migrate' todavía.
-Ve a la carpeta 'database/scripts' en la raíz del proyecto. Abre MySQL Workbench o tu bases de datos de confianza y ejecuta los archivos en este estricto orden:
+### 7. Crear la Base de Datos (Migraciones y Seeders)
+Este proyecto utiliza migraciones y seeders para garantizar que la base de datos sea reproducible en cualquier entorno. NO necesitas ejecutar scripts .sql manualmente.
+Simplemente ejecuta el siguiente comando en tu terminal:
+php artisan migrate:fresh --seed
+Esto creará todas las tablas (incluyendo las de Breeze), los Stored Procedures y cargará los datos iniciales (catálogos y datos de demostración).
 
-01_creacion_tablas.sql (Crea la BD y las tablas relacionales)
-
-02_stored_procedures.sql (Crea los SPs para el CRUD)
-
-03_inserts_iniciales.sql (Inserta datos maestros y de prueba)
-Nota: El script ya incluye la creación de la base de datos, no la crees manualmente.
-
-Crear las tablas de Autenticación (Breeze)
-Ahora sí, ejecuta las migraciones de Laravel para crear las tablas de usuarios y login:
-php artisan migrate
-
-Compilar assets y levantar el servidor
-Ejecuta:
+### 8. Compilar Assets y Levantar el Servidor
+Ejecuta los siguientes comandos:
 npm run build
 php artisan serve
-(Si usas Laravel Herd, abre el proyecto desde su panel).
-o usa  si haces otro metodo Visita http://localhost:8000 en tu navegador.
+(Si usas Laravel Herd, simplemente abre el proyecto desde el panel de Herd).
+Visita la URL asignada (ej: http://example-app.test o http://localhost:8000) en tu navegador.
 
-CREDENCIALES DE PRUEBA (Usuario Breeze)
-Puedes registrarte en la ruta /register o usar este usuario para probar el panel rápido:
-Email: [PON AQUÍ EL CORREO DEL USUARIO QUE CREASTE]
-Password: [PON AQUÍ LA CONTRASEÑA]
+### 9.CREDENCIALES DE PRUEBA (Usuario Breeze)
+CREDENCIALES DE PRUEBA (Usuario Administrador)
+El sistema crea automáticamente un usuario administrador al ejecutar las migraciones y seeders (php artisan migrate:fresh --seed). Las credenciales se configuran desde las variables ADMIN_EMAIL y ADMIN_PASSWORD en el archivo .env. puedes agregar el tuyo en el archivo .env o hacerlo con tu bases de datos mysql con el siguiente comando despues de registrarte en la pagina
+UPDATE users SET role = 'admin' WHERE email = 'tu_correo@ejemplo.com';
 
-EXPLICACIÓN TÉCNICA DEL CÓDIGO
+ESTRUCTURA Y EXPLICACIÓN DEL CÓDIGO
 
-Layouts: Usamos 'resources/views/layouts/panel.blade.php' como plantilla maestra (Header, Footer, CSS). Las vistas del CRUD hacen @extends('layouts.panel') para no repetir código.
+routes/web.php: Define las rutas públicas (Landing Page) y las rutas protegidas (Panel de Administración usando middleware('auth') y middleware('admin')).
 
-Rutas: 'routes/web.php' contiene la ruta pública ('/') y las rutas protegidas (middleware 'auth') para el CRUD.
+resources/views/layouts/: Contiene panel.blade.php, el layout maestro que hereda el diseño de la Landing Page (colores, header, footer) y es usado por todas las vistas del CRUD.
 
-Controladores y SPs: En lugar del ORM de Laravel, el controlador usa 'DB::select('CALL sp_...')' para llamar directamente a los Stored Procedures de MySQL. Esto centraliza la lógica pesada (JOINs, cálculos, inserciones) en la base de datos, ahorrando código en PHP y optimizando el rendimiento.
+app/Http/Controllers/: La lógica del CRUD. Los controladores (DestinoController y ReservaController) utilizan una arquitectura híbrida: usan Eloquent (Modelos) para consultar datos (listados con relaciones) y llaman directamente a los Stored Procedures (DB::statement('CALL sp_...')) para las inserciones, actualizaciones y eliminaciones.
+
+app/Http/Middleware/AdminMiddleware.php: Middleware que protege las rutas del CRUD, permitiendo el acceso únicamente a usuarios con el rol de 'admin'.
+
+database/migrations/ y database/seeders/: Contienen la estructura de las tablas, la creación de los Stored Procedures y los datos iniciales. Esto garantiza que la base de datos se cree automáticamente con el comando php artisan migrate:fresh --seed.
+
+NOTA SOBRE LA LÓGICA DE NEGOCIO Y BASE DE DATOS
+La lógica de negocio pesada (inserciones, cálculos de saldos en reservas, actualizaciones y consultas complejas con JOINS) está centralizada en Stored Procedures dentro de MySQL. Esto garantiza un alto rendimiento, seguridad contra inyecciones SQL y mantiene la integridad relacional del sistema. El controlador en Laravel actúa únicamente como un puente entre la interfaz y la base de datos, manteniendo el código PHP limpio y fácil de mantener.
+
+PRUEBAS AUTOMATIZADAS (TESTING)
+El proyecto cuenta con una suite de 9 pruebas automatizadas (Feature Tests) implementadas con PHPUnit. Para ejecutarlas, corre el comando:
+php artisan test
+Estas pruebas validan:
+
+El middleware de autorización por roles (Admin vs Usuario).
+
+Las validaciones de los formularios de reservas.
+
+La lógica de negocio (rechazo de abonos mayores al precio total).
+
+
