@@ -97,4 +97,13 @@ Las validaciones de los formularios de reservas.
 
 La lógica de negocio (rechazo de abonos mayores al precio total).
 
+## 🌐 Demo en producción
 
+Sitio: https://www.toursystem.site
+
+Credenciales de prueba (usuario administrador de la demo):
+- Correo: admin@ejemplo.com
+- Contraseña: Socios12
+
+> Estas credenciales son solo de la demo académica. En el repositorio,
+> `.env.example` usa valores de ejemplo; cada instalación define los suyos.
