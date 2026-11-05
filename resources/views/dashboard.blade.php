@@ -1,36 +1,30 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('layouts.panel')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
-                <h3 class="text-lg font-bold mb-4">Resumen del Sistema (Eloquent)</h3>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-blue-100 p-4 rounded">
-                        <p class="text-gray-600">Total Clientes:</p>
-                        <p class="text-3xl font-bold">{{ $totalClientes }}</p>
-                    </div>
-                    <div class="bg-green-100 p-4 rounded">
-                        <p class="text-gray-600">Total Reservas:</p>
-                        <p class="text-3xl font-bold">{{ $totalReservas }}</p>
-                    </div>
+@section('content')
+    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+        <h2 class="fw-bold" style="color: var(--color-text);">Bienvenido, {{ Auth::user()->name }}</h2>
+    </div>
+
+    <div class="card shadow-sm border-0" style="border-radius: var(--radius-lg);">
+        <div class="card-body p-4 text-center">
+            <i class="fa-solid fa-gauge-high fs-1 mb-3" style="color: var(--color-primary);"></i>
+            <h4 class="fw-bold">Panel de Administración TourSystem</h4>
+            <p class="text-muted">Selecciona una opción del menú superior para comenzar a gestionar el sistema.</p>
+            
+            <div class="row mt-4 justify-content-center">
+                <div class="col-md-4">
+                    <a href="{{ route('destinos.index') }}" class="btn btn-outline-primary w-100 py-3 mb-2" style="color: var(--color-primary); border-color: var(--color-primary);">
+                        <i class="fa-solid fa-map-location-dot fs-3 d-block mb-2"></i>
+                        Gestionar Destinos
+                    </a>
                 </div>
-
-                <h4 class="text-md font-bold mt-6 mb-2">Últimas 5 Reservas (Relación Eloquent)</h4>
-                <ul class="list-disc pl-5">
-                    @foreach($ultimasReservas as $reserva)
-                        <li>
-                            Reserva {{ $reserva->numero_reserva }} - 
-                            Cliente: <strong>{{ $reserva->cliente->nombres_razon_social ?? 'Sin cliente' }}</strong>
-                        </li>
-                    @endforeach
-                </ul>
+                <div class="col-md-4">
+                    <a href="{{ route('reservas.index') }}" class="btn btn-outline-primary w-100 py-3 mb-2" style="color: var(--color-primary); border-color: var(--color-primary);">
+                        <i class="fa-solid fa-calendar-check fs-3 d-block mb-2"></i>
+                        Gestionar Reservas
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection
