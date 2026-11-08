@@ -22,7 +22,7 @@
 
     <div class="card shadow-sm border-0" style="border-radius: var(--radius-lg);">
         <div class="card-body p-4">
-            <form action="{{ route('destinos.store') }}" method="POST">
+            <form action="{{ route('destinos.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 
                 <div class="row mb-4">
@@ -86,6 +86,25 @@
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Descripción</label>
                     <textarea name="descripcion" class="form-control" rows="3">{{ old('descripcion') }}</textarea>
+                </div>
+
+                {{-- Nuevos campos: Popularidad y Restricciones --}}
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Popularidad (1-10, Opcional)</label>
+                        <input type="number" min="1" max="10" name="popularidad" class="form-control"
+                               value="{{ old('popularidad') }}">
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label fw-semibold">Restricciones (Opcional)</label>
+                        <textarea name="restricciones" class="form-control" rows="2">{{ old('restricciones') }}</textarea>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Foto del destino (Opcional)</label>
+                    <input type="file" name="imagen" class="form-control" accept="image/jpeg,image/png,image/webp">
+                    <div class="form-text">Formatos JPG, PNG o WEBP. Máximo 2 MB.</div>
                 </div>
 
                 <div class="d-flex justify-content-end gap-2 mt-4">

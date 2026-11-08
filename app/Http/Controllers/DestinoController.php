@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; // Importante para los SP
+use Illuminate\Support\Facades\Storage;
 
 class DestinoController extends Controller
 {
@@ -29,17 +30,17 @@ class DestinoController extends Controller
     // 3. Guardar en BD (Usando tu SP de inserción)
     public function store(Request $request)
     {
-        // Validación básica (puedes ampliarla)
         $request->validate([
             'codigo' => 'required|unique:Destino_Turistico,codigo',
             'nombre' => 'required',
             'id_tipo' => 'required',
             'id_pais' => 'required',
             'id_region' => 'required',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'popularidad' => 'nullable|integer|between:1,10',
         ]);
 
-        // Llamamos al SP con los parámetros exactos que definiste
-        DB::statement('CALL sp_destino_insert(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+        $resultado = DB::select('CALL sp_destino_insert(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
             $request->codigo,
             $request->nombre,
             $request->latitud ?? null,
@@ -52,6 +53,11 @@ class DestinoController extends Controller
             $request->id_region
         ]);
 
+        if ($request->hasFile('imagen')) {
+            $ruta = $request->file('imagen')->store('destinos', 's3');
+            DB::statement('CALL sp_destino_set_imagen(?, ?)', [$resultado[0]->id_generado, $ruta]);
+        }
+
         return redirect()->route('destinos.index')->with('success', 'Destino creado exitosamente.');
     }
 
@@ -60,12 +66,12 @@ class DestinoController extends Controller
     {
         // Usamos el SP de get_by_id
         $destinoArray = DB::select('CALL sp_destino_get_by_id(?)', [$id]);
-        
+
         // Si no existe, error 404
         if (empty($destinoArray)) {
             abort(404);
         }
-        
+
         $destino = $destinoArray[0]; // El SP devuelve un array, tomamos el primero
 
         // Cargamos los combos de nuevo
@@ -82,6 +88,8 @@ class DestinoController extends Controller
         $request->validate([
             'codigo' => 'required',
             'nombre' => 'required',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'popularidad' => 'nullable|integer|between:1,10',
         ]);
 
         DB::statement('CALL sp_destino_update(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
@@ -98,13 +106,34 @@ class DestinoController extends Controller
             $request->id_region
         ]);
 
+        if ($request->hasFile('imagen')) {
+            // Guardamos la ruta de la foto anterior para borrarla del bucket
+            $anterior = (DB::select('CALL sp_destino_get_by_id(?)', [$id])[0] ?? null)?->imagen;
+
+            $ruta = $request->file('imagen')->store('destinos', 's3');
+            DB::statement('CALL sp_destino_set_imagen(?, ?)', [$id, $ruta]);
+
+            if ($anterior) {
+                Storage::disk('s3')->delete($anterior);
+            }
+        }
+
         return redirect()->route('destinos.index')->with('success', 'Destino actualizado.');
     }
 
     // 6. Eliminar (Usando tu SP de delete)
     public function destroy($id)
     {
+        $destino = DB::select('CALL sp_destino_get_by_id(?)', [$id])[0] ?? null;
+
         DB::statement('CALL sp_destino_delete(?)', [$id]);
+
+        // Se borra la foto después del DELETE: si este falla por una llave
+        // foránea, la imagen no se pierde.
+        if ($destino && !empty($destino->imagen)) {
+            Storage::disk('s3')->delete($destino->imagen);
+        }
+
         return redirect()->route('destinos.index')->with('success', 'Destino eliminado.');
     }
 }

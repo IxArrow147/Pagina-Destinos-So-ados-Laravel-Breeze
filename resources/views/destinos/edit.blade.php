@@ -22,18 +22,18 @@
 
     <div class="card shadow-sm border-0" style="border-radius: var(--radius-lg);">
         <div class="card-body p-4">
-            <form action="{{ route('destinos.update', $destino->id_destino) }}" method="POST">
+            <form action="{{ route('destinos.update', $destino->id_destino) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT') <!-- Importante para que Laravel sepa que es una actualización -->
-                
+                @method('PUT')
+
                 <div class="row mb-4">
                     <div class="col-md-4">
                         <label class="form-label fw-semibold">Código</label>
-                        <input type="text" name="codigo" class="form-control" value="{{ $destino->codigo }}" required>
+                        <input type="text" name="codigo" class="form-control" value="{{ old('codigo', $destino->codigo) }}" required>
                     </div>
                     <div class="col-md-8">
                         <label class="form-label fw-semibold">Nombre del Destino</label>
-                        <input type="text" name="nombre" class="form-control" value="{{ $destino->nombre }}" required>
+                        <input type="text" name="nombre" class="form-control" value="{{ old('nombre', $destino->nombre) }}" required>
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
                         <label class="form-label fw-semibold">Tipo de Destino</label>
                         <select name="id_tipo" class="form-select" required>
                             @foreach($tipos as $tipo)
-                                <option value="{{ $tipo->id }}" {{ $destino->id_tipo_destino == $tipo->id ? 'selected' : '' }}>
+                                <option value="{{ $tipo->id }}" {{ old('id_tipo', $destino->id_tipo_destino) == $tipo->id ? 'selected' : '' }}>
                                     {{ $tipo->nombre }}
                                 </option>
                             @endforeach
@@ -52,7 +52,7 @@
                         <label class="form-label fw-semibold">País</label>
                         <select name="id_pais" class="form-select" required>
                             @foreach($paises as $pais)
-                                <option value="{{ $pais->id }}" {{ $destino->id_pais == $pais->id ? 'selected' : '' }}>
+                                <option value="{{ $pais->id }}" {{ old('id_pais', $destino->id_pais) == $pais->id ? 'selected' : '' }}>
                                     {{ $pais->nombre }}
                                 </option>
                             @endforeach
@@ -62,7 +62,7 @@
                         <label class="form-label fw-semibold">Región</label>
                         <select name="id_region" class="form-select" required>
                             @foreach($regiones as $region)
-                                <option value="{{ $region->id }}" {{ $destino->id_region == $region->id ? 'selected' : '' }}>
+                                <option value="{{ $region->id }}" {{ old('id_region', $destino->id_region) == $region->id ? 'selected' : '' }}>
                                     {{ $region->nombre }}
                                 </option>
                             @endforeach
@@ -73,17 +73,47 @@
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Latitud (Opcional)</label>
-                        <input type="number" step="0.000001" name="latitud" class="form-control" value="{{ $destino->latitud }}">
+                        <input type="number" step="0.000001" name="latitud" class="form-control" value="{{ old('latitud', $destino->latitud) }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label fw-semibold">Longitud (Opcional)</label>
-                        <input type="number" step="0.000001" name="longitud" class="form-control" value="{{ $destino->longitud }}">
+                        <input type="number" step="0.000001" name="longitud" class="form-control" value="{{ old('longitud', $destino->longitud) }}">
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label fw-semibold">Descripción</label>
-                    <textarea name="descripcion" class="form-control" rows="3">{{ $destino->descripcion }}</textarea>
+                    <textarea name="descripcion" class="form-control" rows="3">{{ old('descripcion', $destino->descripcion) }}</textarea>
+                </div>
+
+                {{-- Nuevos campos: Popularidad y Restricciones --}}
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <label class="form-label fw-semibold">Popularidad (1-10, Opcional)</label>
+                        <input type="number" min="1" max="10" name="popularidad" class="form-control"
+                               value="{{ old('popularidad', $destino->nivel_popularidad) }}">
+                    </div>
+                    <div class="col-md-8">
+                        <label class="form-label fw-semibold">Restricciones (Opcional)</label>
+                        <textarea name="restricciones" class="form-control" rows="2">{{ old('restricciones', $destino->restricciones) }}</textarea>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Foto del destino</label>
+
+                    @if(!empty($destino->imagen))
+                        <div class="mb-2">
+                            <img src="{{ Storage::disk('s3')->temporaryUrl($destino->imagen, now()->addMinutes(30)) }}"
+                                 alt="{{ $destino->nombre }}"
+                                 class="img-fluid rounded border"
+                                 style="max-height: 200px;">
+                        </div>
+                        <div class="form-text mb-2">Si subes una foto nueva, reemplazará a la actual.</div>
+                    @endif
+
+                    <input type="file" name="imagen" class="form-control" accept="image/jpeg,image/png,image/webp">
+                    <div class="form-text">Formatos JPG, PNG o WEBP. Máximo 2 MB.</div>
                 </div>
 
                 <div class="d-flex justify-content-end gap-2 mt-4">
