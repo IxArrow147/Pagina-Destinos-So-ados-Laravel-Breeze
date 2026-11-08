@@ -36,3 +36,7 @@ Route::middleware('auth')->group(function () {
 
 // 5. Autenticación
 require __DIR__.'/auth.php';
+
+Route::get('/debug-sentry', function () {
+    throw new Exception('Prueba de Sentry desde producción');
+});
