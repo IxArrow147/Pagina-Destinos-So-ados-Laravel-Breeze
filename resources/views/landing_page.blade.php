@@ -352,7 +352,7 @@
                     <ul class="footer__list">
                         <li class="footer__item"><i class="fa-solid fa-location-dot footer__icon"></i><span class="footer__text">Dirección de la empresa</span></li>
                         <li class="footer__item"><i class="fa-solid fa-phone footer__icon"></i><span class="footer__text">+57 000 000 0000</span></li>
-                        <li class="footer__item"><i class="fa-solid fa-envelope footer__icon"></i><span class="footer__text">correo@destinossonados.com</span></li>
+                        <li class="footer__item"><i class="fa-solid fa-envelope footer__icon"></i><span class="footer__text">miguelnarvaez1580@gmail.com</span></li>
                     </ul>
                 </div>
                 <div class="footer__column">
@@ -366,9 +366,15 @@
                 </div>
             </div>
             <div class="footer__bottom">
-                <p class="footer__copyright">&copy; 2026 Destinos Soñados S.A. — TourSystem. Todos los derechos reservados.</p>
+                <p class="footer__copyright">
+                    &copy; 2026 Destinos Soñados S.A. — TourSystem. Todos los derechos reservados.
+                </p>
+                <p class="footer__copyright mt-2">
+                    <a href="{{ route('politica.privacidad') }}" class="footer__link">
+                        <i class="fa-solid fa-shield-halved me-1"></i> Política de tratamiento de datos personales
+                    </a>
+                </p>
             </div>
-        </div>
     </footer>
 
     <!-- Bootstrap JS v5.3.8 -->

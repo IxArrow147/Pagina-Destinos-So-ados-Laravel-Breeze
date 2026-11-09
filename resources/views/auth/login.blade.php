@@ -38,6 +38,11 @@
             <p class="mb-0 text-muted">¿No tienes cuenta? 
                 <a href="{{ route('register') }}" class="fw-bold" style="color: var(--color-primary);">Regístrate aquí</a>
             </p>
+            <div class="text-center mt-3">
+                <a href="{{ route('politica.privacidad') }}" class="btn btn-outline-primary btn-sm">
+                    <i class="fa-solid fa-shield-halved me-1"></i> Política de privacidad
+                </a>
+            </div>
         </div>
     </form>
 </x-guest-layout>

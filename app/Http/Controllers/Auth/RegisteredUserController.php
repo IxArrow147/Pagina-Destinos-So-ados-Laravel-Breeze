@@ -34,12 +34,17 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'privacy' => ['accepted'],
+        ], [
+            'privacy.accepted' => 'Debes aceptar la Política de Tratamiento de Datos Personales para registrarte.',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'privacy_accepted_at' => now(),
+            'privacy_policy_version' => config('privacy.version'),
         ]);
 
         event(new Registered($user));

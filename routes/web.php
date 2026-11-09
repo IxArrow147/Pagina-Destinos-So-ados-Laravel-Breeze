@@ -8,6 +8,9 @@ Route::get('/', function () {
     return view('landing_page');
 })->name('landing_page');
 
+// 1. Rutas Publicas
+Route::view('/politica-de-privacidad', 'politica-privacidad')->name('politica.privacidad');
+
 // 2. Dashboard (Protegido solo por auth, no por admin)
 Route::get('/dashboard', function () {
     $totalClientes = \App\Models\Cliente::count();
@@ -16,7 +19,7 @@ Route::get('/dashboard', function () {
     return view('dashboard', compact('totalClientes', 'totalReservas', 'ultimasReservas'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-//2.5 Rutas Publicas
+//2.5 Rutas Solo loging
 Route::middleware('auth')->group(function () {
    
 });

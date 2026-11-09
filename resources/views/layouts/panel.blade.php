@@ -96,9 +96,10 @@
     </main>
 
     <!-- ===================== FOOTER DEL PANEL ===================== -->
-    <footer class="footer py-3 text-center" style="padding: 1rem 0 !important;">
-        <p class="footer__copyright m-0">&copy; 2026 Destinos Soñados S.A. — TourSystem Panel.</p>
-    </footer>
+    <p class="footer__copyright m-0">
+        &copy; 2026 Destinos Soñados S.A. — TourSystem Panel.
+        <a href="{{ route('politica.privacidad') }}" class="ms-2" style="color: inherit;">Política de privacidad</a>
+    </p>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
