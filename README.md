@@ -194,11 +194,13 @@ Verificaciones realizadas:
 
 ✅ Dominio de envío verificado (toursystem.site)
 
-**Evidencias:**
+Evidencias:
+
 ![Resend 1](./docs/screenshots/01-1-resend.png)
 ![Resend 2](./docs/screenshots/01-2-resend.png)
 ![Resend 3](./docs/screenshots/01-3-resend.png)
 ![Resend 4](./docs/screenshots/01-4-resend.png)
+
 ---
 📊 Better Stack — Monitoreo y Disponibilidad
 Plataforma: https://betterstack.com/
@@ -225,7 +227,8 @@ Verificaciones realizadas:
 
 ✅ Información de disponibilidad e incidentes visible en el panel
 
-**Evidencias:**
+Evidencias:
+
 ![Better Stack 1](./docs/screenshots/06-1-betterstack.png)
 ![Better Stack 2](./docs/screenshots/06-2-betterstack.png)
 
@@ -259,7 +262,9 @@ Verificaciones realizadas:
 ✅ Archivos almacenados en B2 y no en disco local del servidor
 
 ### 🗄️ Backblaze B2 — Almacenamiento Externo
-**Evidencias:**
+
+Evidencias:
+
 ![Bucket 1](./docs/screenshots/03-1-bucket.png)
 ![Bucket 2](./docs/screenshots/03-2-bucket.png)
 ![Bucket 3](./docs/screenshots/03-3-bucket.png)
@@ -292,7 +297,9 @@ Verificaciones realizadas:
 
 ✅ Errores visibles desde el panel de Sentry
 ### 🐛 Sentry — Seguimiento de Errores
-**Evidencias:**
+
+Evidencias:
+
 ![Sentry 1](./docs/screenshots/02-1-sentry.png)
 ![Sentry 2](./docs/screenshots/02-2-sentry.png)
 ![Sentry 3](./docs/screenshots/02-3-sentry.png)
@@ -323,7 +330,9 @@ Derechos del titular
 ✅ Medidas de protección: contraseñas hasheadas (bcrypt), HTTPS, roles y middleware de autorización
 
 ### 🔒 Privacidad y Tratamiento de Datos
-**Evidencias:**
+
+Evidencias:
+
 ![Política 1](./docs/screenshots/04-1-politica-y-privacidad.png)
 ![Política 2](./docs/screenshots/04-2-politica-y-privacidad.png)
 ![Política 3](./docs/screenshots/04-3-politica-y-privacidad.png)
@@ -349,6 +358,8 @@ Protección: la operación requiere autenticación previa (password + sesión ac
 ℹ️ Los datos que deban conservarse por mandato legal (ej. registros contables de reservas) no se eliminan indiscriminadamente; se anonimizan para preservar la integridad de los registros históricos.
 
 ### 🗑️ Eliminación de Cuenta
-**Evidencias:**
+
+Evidencias:
+
 ![Eliminar Cuenta 1](./docs/screenshots/05-1-eliminar-cuenta.png)
 ![Eliminar Cuenta 2](./docs/screenshots/05-2-eliminar-cuenta.png)
