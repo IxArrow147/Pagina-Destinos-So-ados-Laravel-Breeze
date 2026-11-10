@@ -230,7 +230,12 @@
                         <div><small>Sección 9</small><h2>Vigencia y cambios</h2></div>
                     </div>
                     <p>
-                        Sus datos se conservan mientras su cuenta esté activa y, después, solo durante el tiempo que la ley exija.
+                        Sus datos se conservan mientras su cuenta esté activa. Si usted elimina su cuenta desde su perfil,
+                        se borran de forma permanente su nombre, correo, contraseña, constancia de autorización y sesiones activas.
+                        Actualmente no existe información asociada a su cuenta que la ley obligue a conservar; si en el futuro
+                        alguna norma exigiera conservar algún dato, solo se conservará ese dato y por el tiempo estrictamente exigido.
+                    </p>
+                    <p>
                         Si esta política cambia de forma sustancial, lo informaremos en la plataforma.
                         La versión vigente es la {{ config('privacy.version') }}, desde el {{ config('privacy.fecha_vigencia') }}.
                     </p>
