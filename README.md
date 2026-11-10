@@ -105,7 +105,7 @@ git clone https://github.com/IxArrow147/Pagina-Destinos-So-ados-Laravel-Breeze
 cd Pagina-Destinos-So-ados-Laravel-Breeze
 composer install
 npm install
-
+```
 3. Configurar el entorno (.env)
 cp .env.example .env
 php artisan key:generate
