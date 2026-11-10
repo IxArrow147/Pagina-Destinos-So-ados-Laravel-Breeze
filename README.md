@@ -196,10 +196,10 @@ Verificaciones realizadas:
 
 Evidencias:
 
-https://./docs/screenshots/01-1-resend.png
-https://./docs/screenshots/01-2-resend.png
-https://./docs/screenshots/01-3-resend.png
-https://./docs/screenshots/01-4-resend.png
+![Resend 1](./docs/screenshots/01-1-resend.png)
+![Resend 2](./docs/screenshots/01-2-resend.png)
+![Resend 3](./docs/screenshots/01-3-resend.png)
+![Resend 4](./docs/screenshots/01-4-resend.png)
 
 ---
 📊 Better Stack — Monitoreo y Disponibilidad
@@ -229,8 +229,8 @@ Verificaciones realizadas:
 
 Evidencias:
 
-https://./docs/screenshots/06-1-betterstack.png
-https://./docs/screenshots/06-2-betterstack.png
+![Better Stack 1](./docs/screenshots/06-1-betterstack.png)
+![Better Stack 1](./docs/screenshots/06-2-betterstack.png)
 
 ---
 🗄️ Backblaze B2 — Almacenamiento Externo
@@ -265,11 +265,11 @@ Verificaciones realizadas:
 
 Evidencias:
 
-https://./docs/screenshots/03-1-bucket.png
-https://./docs/screenshots/03-2-bucket.png
-https://./docs/screenshots/03-3-bucket.png
-https://./docs/screenshots/03-4-bucket.png
-https://./docs/screenshots/03-5-bucket.png
+![Bucket 1](./docs/screenshots/03-1-bucket.png)
+![Bucket 2](./docs/screenshots/03-2-bucket.png)
+![Bucket 3](./docs/screenshots/03-3-bucket.png)
+![Bucket 4](./docs/screenshots/03-4-bucket.png)
+![Bucket 5](./docs/screenshots/03-5-bucket.png)
 
 ---
 🐛 Sentry — Seguimiento de Errores
@@ -300,11 +300,11 @@ Verificaciones realizadas:
 
 Evidencias:
 
-https://./docs/screenshots/02-1-sentry.png
-https://./docs/screenshots/02-2-sentry.png
-https://./docs/screenshots/02-3-sentry.png
-https://./docs/screenshots/02-4-sentry.png
-https://./docs/screenshots/02-5-sentry.png
+![Sentry 1](./docs/screenshots/02-1-sentry.png)
+![Sentry 2](./docs/screenshots/02-2-sentry.png)
+![Sentry 3](./docs/screenshots/02-3-sentry.png)
+![Sentry 4](./docs/screenshots/02-4-sentry.png)
+![Sentry 5](./docs/screenshots/02-5-sentry.png)
 
 ---
 🔒 Privacidad y Tratamiento de Datos Personales
@@ -333,10 +333,10 @@ Derechos del titular
 
 Evidencias:
 
-https://./docs/screenshots/04-1-politica-y-privacidad.png
-https://./docs/screenshots/04-2-politica-y-privacidad.png
-https://./docs/screenshots/04-3-politica-y-privacidad.png
-https://./docs/screenshots/04-4-politica-y-privacidad.png
+![Política 1](./docs/screenshots/04-1-politica-y-privacidad.png)
+![Política 2](./docs/screenshots/04-2-politica-y-privacidad.png)
+![Política 3](./docs/screenshots/04-3-politica-y-privacidad.png)
+![Política 4](./docs/screenshots/04-4-politica-y-privacidad.png)
 
 ---
 🗑️ Eliminación de Cuenta
@@ -361,5 +361,5 @@ Protección: la operación requiere autenticación previa (password + sesión ac
 
 Evidencias:
 
-https://./docs/screenshots/05-1-eliminar-cuenta.png
-https://./docs/screenshots/05-2-eliminar-cuenta.png
+![Eliminar Cuenta 1](./docs/screenshots/05-1-eliminar-cuenta.png)
+![Eliminar Cuenta 2](./docs/screenshots/05-2-eliminar-cuenta.png)
